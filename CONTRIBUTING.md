@@ -20,7 +20,7 @@ conda install pre-commit
 pre-commit install
 ```
 
-Once `pre-commit` is installed, it will automatically correct formatting when your run `git commit ...`.
+Once `pre-commit` is installed, it will automatically correct formatting when you run `git commit ...`.
 If corrections are made, the commit may be aborted, allowing you to check the result and commit again.
 You can also correct files before committing with the command: `pre-commit run --all-files`
 

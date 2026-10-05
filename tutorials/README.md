@@ -1,17 +1,17 @@
-# Tutorials for "Foundations of Molecular Dynamics Simulations"
+# Tutorials for "Foundations and Applications of Molecular Dynamics"
 
 (See top-level [README.md](../README.md) for license and scope.)
 
 ## Overview
 
-The tutorial consists of the following sections, to be followed more or less in order:
+The tutorials consist of the following sections, to be followed more or less in order:
 
 **1. First steps:**
 
 - [01_first_steps/01_water.ipynb](01_first_steps/01_water.ipynb)
 - [01_first_steps/02_lennard_jones.ipynb](01_first_steps/02_lennard_jones.ipynb)
 
-**2. Different ways of simulating analine dipeptide:**
+**2. Different ways of simulating alanine dipeptide:**
 
 - [02_alanine_dipeptide/01_force_fields.ipynb](02_alanine_dipeptide/01_force_fields.ipynb)
 
@@ -29,19 +29,18 @@ The tutorial consists of the following sections, to be followed more or less in 
 - [05_analysis/02_physicochemical_properties.ipynb](05_analysis/02_physicochemical_properties.ipynb)
 - [05_analysis/03_alignment_principal_component_analysis.ipynb](05_analysis/03_alignment_principal_component_analysis.ipynb)
 
-**6. Visualization**
+**6. Visualization:**
 
 - [06_visualization/visualization.md](06_visualization/visualization.md)
 
-**7. Ligands** (This part is still under development and does not work at the moment.)
+**7. Ligands:** (This part is still under development and does not work at the moment.)
 
 - [07_ligands/01_ibuprofen_gas_phase.ipynb](07_ligands/01_ibuprofen_gas_phase.ipynb)
 - [07_ligands/02_ibuprofen_solvent.ipynb](07_ligands/02_ibuprofen_solvent.ipynb)
 
-
 ## Online resources
 
-The tutorials are strongly inspired by several online resources (tutorials, documentation and examples) of the OpenMM, Python, NumPy, Matplotlib and other projects.
+The tutorials are strongly inspired by several online resources (tutorials, documentation and examples) from the OpenMM, Python, NumPy, Matplotlib and other projects.
 The main references are:
 
 * OpenMM website: http://openmm.org/
@@ -49,8 +48,8 @@ The main references are:
 * Python website: https://www.python.org/
 * Python tutorial: https://docs.python.org/3/tutorial/index.html
 * NumPy website: https://numpy.org/
-* NumPy Users Guide: https://docs.scipy.org/doc/numpy/user/index.html
-* MatPlotLib website: https://matplotlib.org/
+* NumPy User Guide: https://docs.scipy.org/doc/numpy/user/index.html
+* Matplotlib website: https://matplotlib.org/
 * nglview: http://nglviewer.org/nglview/latest/
 * MDTraj: http://mdtraj.org/
 

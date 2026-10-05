@@ -15,7 +15,7 @@ A native setup on Windows is currently untested.
 ## A Note on Virtual Terminals
 
 The instructions below require you to enter commands in a [virtual terminal](https://en.wikipedia.org/wiki/Virtual_console),
-the software equivalent of a [terminal computer](https://en.wikipedia.org/wiki/Computer_terminal) from the 70s.
+the software equivalent of a [terminal computer](https://en.wikipedia.org/wiki/Computer_terminal) from the 1970s.
 You type a text command, which is executed after you press `Enter`.
 Possibly some output is shown as a result, but not always.
 When the command completes, you can enter the next command.
@@ -42,19 +42,19 @@ Take the following steps:
     bash Miniforge3*.sh -b
     ```
 
-    Add the following line to your `~/.bashrc` (or `~/.bash_profile`) file (assuming that our terminal runs Bash):
+    Add the following line to your `~/.bashrc` (or `~/.bash_profile`) file (assuming that your terminal runs Bash):
 
     ```bash
     alias m='eval "$(${HOME}/miniforge3/bin/mamba shell hook --shell bash)"; mamba activate'
     ```
 
-    We do not recommend the default of Conda or Mamba to always activate the environment in a `~/.bashrc` file.
+    We do not recommend the default behavior of Conda or Mamba, which activates the base environment in every new terminal through `~/.bashrc`.
     Whenever you need it, just type `m` in a virtual terminal to activate the base environment of Miniforge.
 
     Close the terminal.
 
 1. Start a (new) virtual terminal and activate the Miniforge environment
-   by executing the command alias `m`.
+   by executing the alias `m`.
 
 1. Configure Miniforge and install OpenMM (and other useful tools).
 
@@ -87,8 +87,8 @@ Take the following steps:
     mamba install cudatoolkit
     ```
 
-    You may have to close your terminal and re-open a new one,
-    run the commands `m` and `mamba activate openmm` again before the following steps work.
+    You may have to close your terminal, open a new one,
+    and run the commands `m` and `mamba activate openmm` again before the following steps work.
 
 1. Test your OpenMM installation with the following terminal command:
 
@@ -121,7 +121,7 @@ Take the following steps:
         - https://jupyterlab.readthedocs.io/en/stable/user/interface.html
         - https://jupyterlab.readthedocs.io/en/stable/user/notebook.html
 
-      You can start Jupyter Lab on your own computer, e.g. by entering `jupyter lab` in the virtual terminal.
+      You can start Jupyter Lab on your own computer, e.g., by entering `jupyter lab` in the virtual terminal.
 
     - If you want to use VSCode, the following links provide easy-to-follow guides, which will get you up to speed:
 
@@ -139,9 +139,8 @@ Take the following steps:
     In VSCode, you will have to select the `openmm` environment as the Python 3 kernel for the notebook.
     This should show the same output as in the previous step.
 
-1. Install VMD, which will be used for showing some visualization good practices.
-   Go to [the VMD download page](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD) and follow instructions.
-
+1. Install VMD, which will be used for showing some good visualization practices.
+   Go to [the VMD download page](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD) and follow the instructions.
 
 ## Usage
 
@@ -174,30 +173,37 @@ To start any notebook from the tutorial, download [the ZIP file with the most re
 
 (The instructions below have not been updated yet after renaming the repository to `famd-course`.)
 
-Docker is a virtualization tool (think of it as a virtual computer inside of your physical computer/laptop) that helps with creating a pre-defined working environment. The benefit of using this method is that it doesn't require going through the lengthy installation steps, and the whole process takes less than 10 mins to set up. The downside of this approach is that you may find the container abstraction confusing, but it's worthwhile to learn how docker works, as many modern software projects support this approach.
+Docker is a virtualization tool (think of it as a virtual computer inside your physical computer or laptop) that helps with creating a pre-defined working environment.
+The benefit of this method is that it does not require the lengthy installation steps above, and the whole process takes less than 10 minutes.
+The downside is that you may find the container abstraction confusing, but it is worthwhile to learn how Docker works, as many modern software projects support this approach.
 
-1. Install docker or podman on your machine
+1. Install Docker or Podman on your machine.
 
-In order to use a docker image, you must first install Docker Desktop on your computer. Go to their [website](https://www.docker.com/products/docker-desktop/), and download the latest version compatible with your operating system e.g. MacOS.
+    To use a Docker image, you must first install Docker Desktop on your computer.
+    Go to the [Docker website](https://www.docker.com/products/docker-desktop/) and download the latest version compatible with your operating system, e.g., macOS.
 
-Docker Desktop is free to use for individuals, but if you're working in an enterprise environment, consider using [podman](https://podman.io/docs/installation), which has a much more permissive license (Apache 2.0).
+    Docker Desktop is free to use for individuals, but if you are working in an enterprise environment, consider using [Podman](https://podman.io/docs/installation), which has a much more permissive license (Apache 2.0).
 
-2. Download the container image and start a new container
+1. Download the container image and start a new container.
 
-From the repository run the following command:
-```
-./run_container.sh docker
-```
+    From the repository, run the following command:
 
-n.b. Replace `docker` with `podman` if you installed `podman` instead. Also if you're using podman in a Linux environment, you need to add the following lines to your `/etc/containers/registries.conf` file, otherwise podman won't be able to locate the docker image defined in the `run_container.sh` file.
+    ```bash
+    ./run_container.sh docker
+    ```
 
-```
-[registries.search]
-registries = ['docker.io']
-```
+    N.B. Replace `docker` with `podman` if you installed Podman instead.
+    Also, if you are using Podman in a Linux environment, you need to add the following lines to your `/etc/containers/registries.conf` file,
+    otherwise Podman will not be able to locate the Docker image defined in the `run_container.sh` file.
 
-After you run the command, the script should download the container image (only the first time), and start a Jupyter Lab session from the container.
+    ```toml
+    [registries.search]
+    registries = ['docker.io']
+    ```
 
-3. Copy the Jupyter Lab's URL from the command line output and paste it into the browser.
+    After you run the command, the script should download the container image (only the first time) and start a Jupyter Lab session from the container.
 
-Look for the line that starts with `http://127.0.0.1:8888:lab?token=`. Copy the entire line and paste it into the browser, and you should be able to access the Jupyter Lab server and get started on the tutorial.
+1. Copy the Jupyter Lab URL from the command-line output and paste it into the browser.
+
+    Look for the line that starts with `http://127.0.0.1:8888/lab?token=`.
+    Copy the entire line and paste it into the browser, and you should be able to access the Jupyter Lab server and get started on the tutorial.

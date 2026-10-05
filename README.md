@@ -1,9 +1,9 @@
-# Course Materials for "Foundations of Molecular Dynamics Simulations"
+# Course Materials for "Foundations and Applications of Molecular Dynamics"
 
 ## License
 
 [![License: CC BY-NC 4.0](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
-All files in this repository are licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/). Contributions are welcome, see [CONTRIBUTING.md](https://github.ugent.be/Py4Sci/.github/blob/main/CONTRIBUTING.md) for more details.
+All files in this repository are licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/). Contributions are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 The tutorial setup shows how to use and install different software packages, which have their own licenses.
 
