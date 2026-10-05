@@ -27,7 +27,7 @@ repos:
             .*\.prmtop
         )$
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.13.0
+  rev: v0.15.21
   hooks:
     - id: ruff-format
     - id: ruff-check
