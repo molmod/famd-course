@@ -68,9 +68,9 @@ Take the following steps:
     # The mamba create command is a single long line,
     # too long to fit on screen, so it is usually wrapped.
     # Make sure you copy it completely as a single line.
-    mamba create -n openmm python git numpy pandas scipy matplotlib ipympl rdkit openbabel openmm mdtraj nglview pymbar pdbfixer parmed stacie
+    mamba create -n famd python git numpy pandas scipy matplotlib ipympl rdkit openbabel openmm mdtraj nglview pymbar pdbfixer parmed stacie
     # Activate the OpenMM environment
-    mamba activate openmm
+    mamba activate famd
     ```
 
     If you want to run the notebooks in Jupyter Lab, also install it:
@@ -88,7 +88,7 @@ Take the following steps:
     ```
 
     You may have to close your terminal, open a new one,
-    and run the commands `m` and `mamba activate openmm` again before the following steps work.
+    and run the commands `m` and `mamba activate famd` again before the following steps work.
 
 1. Test your OpenMM installation with the following terminal command:
 
@@ -136,7 +136,7 @@ Take the following steps:
     openmm.testInstallation.main()
     ```
 
-    In VSCode, you will have to select the `openmm` environment as the Python 3 kernel for the notebook.
+    In VSCode, you will have to select the `famd` environment as the Python 3 kernel for the notebook.
     This should show the same output as in the previous step.
 
 1. Install VMD, which will be used for showing some good visualization practices.
@@ -157,13 +157,49 @@ To start any notebook from the tutorial, download [the ZIP file with the most re
     Once you have the right *current directory* in your virtual terminal, enter the following commands:
 
     ```bash
-    mamba activate openmm
+    mamba activate famd
     jupyter lab
     ```
 
 - If you use VSCode, open the folder where you extracted the ZIP file,
   and then open any notebook file in the explorer.
-  You need to select the `openmm` Python 3 kernel when asked.
+  You need to select the `famd` Python 3 kernel when asked.
+
+## Direnv instead of alias
+
+Instead of defining the alias `m` and manually activating it,
+you can also use [direnv](https://direnv.net/) to automatically activate the Miniforge environment
+whenever you enter the directory where you installed it.
+
+Put the following in your `~/.bashrc` (or `~/.bash_profile`) file to enable direnv for Bash:
+
+```bash
+eval "$(direnv hook bash)"
+```
+
+Then define the following helper in `~/.config/direnv/direnvrc`:
+
+```bash
+layout_anaconda() {
+  local env_name="$1"
+  local conda_bin="${HOME}/miniforge3/bin/conda"
+
+  if [ -z "$env_name" ]; then
+    echo "Usage: layout anaconda <env_name>" >&2
+    return 1
+  fi
+
+  # Hook conda/mamba into direnv's shell evaluation
+  eval "$("$conda_bin" shell.bash hook)"
+  conda activate "$env_name"
+}
+```
+
+In the directory where you work on the tutorials, create a `.envrc` file with the following content:
+
+```bash
+layout anaconda famd
+```
 
 ## Known issues
 
