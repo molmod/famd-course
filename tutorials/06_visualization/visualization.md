@@ -80,4 +80,4 @@ The first step is to select the menu option `File` -> `Render`. In the `File Ren
 ${CONDA_PREFIX}/lib/tachyon_LINUXAMD64 vmdscene.dat -format TARGA -o vmdscene.dat.tga
 ```
 
-This should work on Linux and macOS. A slightly different command may be needed on Windows.
+This should work on Linux and macOS.
