@@ -142,6 +142,27 @@ Take the following steps:
 1. Install VMD, which will be used for showing some good visualization practices.
    Go to [the VMD download page](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD) and follow the instructions.
 
+## Workaround for NGLview 4.0.1 bug
+
+The latest version of NGLview, 4.0.1, which is also the one on conda-forge, installed with the instructions above,
+has a severe bug that has not been fixed yet at the time of writing this documentation:
+https://github.com/nglviewer/nglview/issues/1172
+
+The workaround is to modify one file inside the `famd` Conda environment:
+`~/miniforge3/envs/famd/lib/python3.14/site-packages/nglview/_frontend.py`.
+
+It normally contains:
+
+```python
+__frontend_version__ = '4.0'
+```
+
+Change this to:
+
+```python
+__frontend_version__ = '3.1.5'
+```
+
 ## Usage
 
 To start any notebook from the tutorial, download [the ZIP file with the most recent notebooks](https://github.com/molmod/famd-course/archive/main.zip) and unzip this archive.
