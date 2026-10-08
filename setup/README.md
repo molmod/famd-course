@@ -26,6 +26,10 @@ There are two ways to set up the required software environment:
    which is available on the [Tier-2 VSC cluster of Ghent University](https://www.ugent.be/hpc/).
    It is a pre-installed software module with OpenMM and many other scientific packages,
    and is used in several courses at Ghent University.
+   The documentation is only accessible with A UGent account,
+   and requires a login with username (not email) and password.
+   After having followed the [PhyStack setup for VSC](https://github.ugent.be/PhyStack/getting-started/blob/main/docs/setup_vsc.md),
+   you can continue with [a second set of instructions specific to the FAMD course](setup_vsc.md).
 
 2. You can also set up your own environment,
    for which we recommend using [Mamba](https://mamba.readthedocs.io/en/latest/),
