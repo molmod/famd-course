@@ -1,4 +1,4 @@
-# Software Setup with "Conda"
+# Software Setup with Mamba
 
 To run OpenMM simulations on your laptop, we recommend using a standardized Python environment based on Conda.
 These instructions show how to use a derivative of Anaconda, called **Miniforge**, for two reasons:
@@ -6,7 +6,7 @@ These instructions show how to use a derivative of Anaconda, called **Miniforge*
 - Miniforge comes pre-configured with the [conda-forge](https://conda-forge.org/) software channel,
   which contains a larger selection of (scientific) software packages than the default Anaconda channel.
 - Miniforge is more lightweight and comes with the [Mamba](https://mamba.readthedocs.io/en/latest/) package manager,
-  which is a more efficient version of Conda.
+  a faster, drop-in reimplementation of the Conda package manager.
 
 The instructions below are primarily tested on Linux,
 and should also work on macOS and Windows Subsystem for Linux (WSL).
@@ -34,12 +34,18 @@ Take the following steps:
 1. Download the [Miniforge installer](https://conda-forge.org/miniforge/)
    that matches the operating system and CPU architecture of your laptop.
 
-1. Run the Miniforge installer.
-
-    Open a virtual terminal and enter the following command:
+    The following command, entered in a virtual terminal, selects the right installer automatically:
 
     ```bash
-    bash Miniforge3*.sh -b
+    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+    ```
+
+1. Run the Miniforge installer.
+
+    In the same virtual terminal, in the same directory, enter the following command:
+
+    ```bash
+    bash "Miniforge3-$(uname)-$(uname -m).sh" -b
     ```
 
     Add the following line to your `~/.bashrc` (or `~/.bash_profile`) file (assuming that your terminal runs Bash):
@@ -48,7 +54,14 @@ Take the following steps:
     alias m='eval "$(${HOME}/miniforge3/bin/mamba shell hook --shell bash)"; mamba activate'
     ```
 
-    We do not recommend the default behavior of Conda or Mamba, which activates the base environment in every new terminal through `~/.bashrc`.
+    If your terminal runs Zsh (the default on macOS),
+    add the following line to `~/.zshrc` instead:
+
+    ```bash
+    alias m='eval "$(${HOME}/miniforge3/bin/mamba shell hook --shell zsh)"; mamba activate'
+    ```
+
+    We do not recommend the default behavior of Conda or Mamba, which activates the base environment in every new terminal through `~/.bashrc` (or `~/.zshrc`).
     Whenever you need it, just type `m` in a virtual terminal to activate the base environment of Miniforge.
 
     Close the terminal.
@@ -68,27 +81,20 @@ Take the following steps:
     # The mamba create command is a single long line,
     # too long to fit on screen, so it is usually wrapped.
     # Make sure you copy it completely as a single line.
-    mamba create -n famd python git numpy pandas scipy matplotlib ipympl rdkit openbabel openmm mdtraj nglview pymbar pdbfixer parmed stacie
+    mamba create -n famd python git numpy pandas scipy matplotlib ipympl jupyterlab rdkit openbabel openmm mdtraj nglview pymbar pdbfixer parmed stacie
     # Activate the OpenMM environment
     mamba activate famd
     ```
 
-    If you want to run the notebooks in Jupyter Lab, also install it:
+    The `mamba update` and `mamba create` commands show the list of packages they will install or update and ask for confirmation.
+    Check this list before approving it by typing `y` and pressing `Enter`.
 
-    ```bash
-    mamba install jupyterlab
-    ```
-
-    If you want GPU acceleration with CUDA, you need to install the NVIDIA driver for your GPU and the CUDA toolkit.
-    If needed, the drivers can be downloaded from the [NVIDIA website](https://www.nvidia.com/Download/index.aspx).
-    The toolkit can be installed with the following command:
-
-    ```bash
-    mamba install cudatoolkit
-    ```
-
-    You may have to close your terminal, open a new one,
-    and run the commands `m` and `mamba activate famd` again before the following steps work.
+    If you want GPU acceleration with CUDA, you only need to install the NVIDIA driver for your GPU,
+    which can be downloaded from the [NVIDIA website](https://www.nvidia.com/Download/index.aspx) if needed.
+    On Linux, the CUDA-enabled build of OpenMM is installed by default, with the CUDA libraries it needs,
+    so no separate CUDA toolkit is needed.
+    Install the driver before creating the environment, so that Mamba can pick an OpenMM build that is compatible with it.
+    After the test in the next step, `CUDA` should appear in the list of available platforms.
 
 1. Test your OpenMM installation with the following terminal command:
 
@@ -163,6 +169,21 @@ Change this to:
 __frontend_version__ = '3.1.5'
 ```
 
+Instead of editing the file manually, you can also activate the `famd` environment and run:
+
+```bash
+sed -i.bak "s/^__frontend_version__ = .*/__frontend_version__ = '3.1.5'/" "${CONDA_PREFIX}"/lib/python*/site-packages/nglview/_frontend.py
+```
+
+(On macOS, this also works: the `.bak` suffix makes the `-i` option portable between GNU and BSD `sed`.)
+
+This workaround is inherently fragile:
+it modifies the installed package in place,
+so it is lost whenever you update NGLview or recreate the environment.
+In that case, apply it again.
+Once a fixed NGLview release is available on conda-forge,
+update the package (`mamba update nglview`) and do not apply this workaround.
+
 ## Usage
 
 To start any notebook from the tutorial, download [the ZIP file with the most recent notebooks](https://github.com/molmod/famd-course/archive/main.zip) and unzip this archive.
@@ -188,9 +209,9 @@ To start any notebook from the tutorial, download [the ZIP file with the most re
 
 ## Direnv instead of alias
 
-Instead of defining the alias `m` and manually activating it,
-you can also use [direnv](https://direnv.net/) to automatically activate the Miniforge environment
-whenever you enter the directory where you installed it.
+Instead of defining the alias `m` and manually running `m` and `mamba activate famd`,
+you can also use [direnv](https://direnv.net/) to automatically activate the `famd` environment
+whenever you enter the directory where you work on the tutorials (or any of its subdirectories).
 
 Put the following in your `~/.bashrc` (or `~/.bash_profile`) file to enable direnv for Bash:
 
@@ -198,33 +219,21 @@ Put the following in your `~/.bashrc` (or `~/.bash_profile`) file to enable dire
 eval "$(direnv hook bash)"
 ```
 
-Then define the following helper in `~/.config/direnv/direnvrc`:
+For Zsh, put `eval "$(direnv hook zsh)"` in your `~/.zshrc` file instead.
+
+Then, in the directory where you work on the tutorials, create a `.envrc` file with the following content:
 
 ```bash
-layout_anaconda() {
-  local env_name="$1"
-  local conda_bin="${HOME}/miniforge3/bin/conda"
-
-  if [ -z "$env_name" ]; then
-    echo "Usage: layout anaconda <env_name>" >&2
-    return 1
-  fi
-
-  # Hook conda/mamba into direnv's shell evaluation
-  eval "$("$conda_bin" shell.bash hook)"
-  conda activate "$env_name"
-}
+layout anaconda famd ~/miniforge3/bin/conda
 ```
 
-In the directory where you work on the tutorials, create a `.envrc` file with the following content:
+The last argument is the location of the `conda` executable,
+which is needed because Miniforge is not in your `PATH` by default.
+Finally, allow direnv to use this file by running the following command in the same directory:
 
 ```bash
-layout anaconda famd
+direnv allow
 ```
-
-## Known issues
-
-(todo)
 
 ## Docker-based environment
 
