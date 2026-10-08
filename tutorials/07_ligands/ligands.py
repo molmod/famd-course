@@ -1,9 +1,8 @@
-"""Utilities for setting up simulations with non-standard residues in OpenMMM."""
+"""Utilities for setting up simulations with non-standard residues in OpenMM."""
 
-import mdtraj
 import numpy as np
 
-__all__ = ["convert_sdf_to_pdb", "estimate_volume"]
+__all__ = ["convert_sdf_to_pdb"]
 
 
 def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
@@ -22,7 +21,7 @@ def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
     -----
     Openbabel can also perform this type of conversion, but generally does a
     poor job on the atom names in the PDB file. This is a one-off
-    implementation, not meant to be easily extendible to other formats etc. It
+    implementation, not meant to be easily extensible to other formats etc. It
     will not handle broken SDF files gracefully either. All atoms are put in one
     residue and one chain.
 
@@ -31,26 +30,28 @@ def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
         raise ValueError("Residue name too long.")
     # Read the relevant SDF data.
     with open(fn_sdf) as f:
-        # skip a few lines
+        # Skip the header block.
         next(f)
         next(f)
         next(f)
-        words = next(f).split()
-        natom = int(words[0])
-        nbond = int(words[1])
-        # atomic positions in angstroms
+        # The V2000 format has fixed-width columns. Fields are not always
+        # separated by whitespace, e.g. when there are more than 99 atoms.
+        line = next(f)
+        natom = int(line[0:3])
+        nbond = int(line[3:6])
+        # Atomic positions in angstroms.
         atcoords = np.zeros((natom, 3), float)
         atsymbols = []
         for iatom in range(natom):
-            words = next(f).split()
-            atcoords[iatom] = words[:3]
-            atsymbols.append(words[3])
-        # bonds with atom indexes starting at 1.
-        # fomat of one row: [first atom, second atom, integer bond order]
+            line = next(f)
+            atcoords[iatom] = line[0:10], line[10:20], line[20:30]
+            atsymbols.append(line[31:34].strip())
+        # Bonds with atom indexes starting at 1.
+        # Format of one row: [first atom, second atom, integer bond order]
         bonds = np.zeros((nbond, 3), int)
         for ibond in range(nbond):
-            words = next(f).split()
-            bonds[ibond] = words[:3]
+            line = next(f)
+            bonds[ibond] = line[0:3], line[3:6], line[6:9]
 
     # Convert bonds to neighbour dictionary, needed for the CONECT lines in PDB.
     neighbors = {}
@@ -63,7 +64,8 @@ def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
         [
             "HETATM",
             "{:5d}",
-            "{:>4s} ",
+            " ",
+            "{:<4s}",
             " ",
             "{:<3s} ",
             "A",
@@ -72,7 +74,7 @@ def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
             "{:8.3f}",
             "{:8.3f}",
             "{:8.3f}",
-            "  0.00",
+            "  1.00",
             "  0.00",
             "          ",
             "{:>2s}",
@@ -81,10 +83,14 @@ def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
     )
     with open(fn_pdb, "w") as f:
         symbol_counters = {}
-        for iatom, (atcoord, atsymbol) in enumerate(zip(atcoords, atsymbols, strict=False)):
+        for iatom, (atcoord, atsymbol) in enumerate(zip(atcoords, atsymbols, strict=True)):
             c = symbol_counters.get(atsymbol, 0) + 1
             symbol_counters[atsymbol] = c
-            atname = f"{atsymbol}{c}"
+            atname = f"{atsymbol.upper()}{c}"
+            # Atom names of single-letter elements start in the second column of the
+            # atom name field, unless the name has four characters.
+            if len(atsymbol) == 1 and len(atname) < 4:
+                atname = " " + atname
             f.write(
                 hetatm_template.format(
                     iatom + 1,
@@ -93,7 +99,7 @@ def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
                     atcoord[0],
                     atcoord[1],
                     atcoord[2],
-                    atsymbol,
+                    atsymbol.upper(),
                 )
             )
         for iatom, ineighs in sorted(neighbors.items()):
@@ -101,24 +107,3 @@ def convert_sdf_to_pdb(fn_sdf, fn_pdb, resname="UNL"):
                 "CONECT{:5d}{:s}\n".format(iatom, "".join(f"{ineigh:5d}" for ineigh in ineighs))
             )
         f.write("END\n")
-
-
-def estimate_volume(fn_pdb):
-    """Estimate an upper bound for the molecular volume, given a PDB file."""
-    # Load Cartesian coordinates in Angstrom.
-    traj_single = mdtraj.load(fn_pdb)
-    xyz = traj_single.xyz[0] * 10
-    # Get array with vdW radii
-    vdw_radii = np.array([atom.element.radius for atom in traj_single.top.atoms]) * 10
-    # Estimate the width in various directions and derive an average volume.
-    nrep = 1000
-    radii = np.zeros(nrep)
-    for irep in range(nrep):
-        unit = np.random.normal(0, 1, 3)
-        unit /= np.linalg.norm(unit)
-        tf = np.dot(xyz, unit)
-        low = (tf - vdw_radii).min()
-        high = (tf + vdw_radii).max()
-        radii[irep] = (high - low) / 2
-    # Compute average volume
-    return ((4 / 3) * np.pi * radii**3).mean()

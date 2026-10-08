@@ -33,7 +33,7 @@ The tutorials consist of the following sections, to be followed more or less in 
 
 - [06_visualization/visualization.md](06_visualization/visualization.md)
 
-**7. Ligands:** (This part is still under development and does not work at the moment.)
+**7. Ligands:**
 
 - [07_ligands/01_ibuprofen_gas_phase.ipynb](07_ligands/01_ibuprofen_gas_phase.ipynb)
 - [07_ligands/02_ibuprofen_solvent.ipynb](07_ligands/02_ibuprofen_solvent.ipynb)

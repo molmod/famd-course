@@ -3,4 +3,7 @@ target-version = "py311"
 
 [lint]
 select = ["E", "F", "UP", "B", "I", "PGH", "PL", "RUF"]
-ignore = ["F403", "F405", "PLR2004", "PLR0913", "PLR0912", "PLW2901", "PLR0915"]
+ignore = ["PLR2004", "PLR0913", "PLR0912", "PLW2901", "PLR0915"]
+
+[lint.isort]
+known-local-folder = ["block_averaging", "ligands"]

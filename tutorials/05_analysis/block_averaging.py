@@ -25,7 +25,7 @@ def averror(values, num=None):
     Returns
     -------
     averror
-        The error on the averge.
+        The error on the average.
 
     """
     if num is None:
@@ -39,7 +39,8 @@ def num_independent(values, fignum=None):
     """Estimate the number of independent samples in a time series.
 
     This implementation of the block averaging method
-    is based on the description in the book of Allen and Tildesley.
+    is based on the description in the book of Allen and Tildesley
+    (Computer Simulation of Liquids, second edition, 2017, section 8.4.1).
     In addition to the book, this code attempts to safeguard against ballistic motion artifacts
     when performing the extrapolation towards infinite block sizes.
 
@@ -59,7 +60,7 @@ def num_independent(values, fignum=None):
     quality
         An empirical quality indicator to judge if the series is sufficiently
         long for a reliable estimate of the number of independent samples.
-        This should be at least 5, preferrably more. When less than 5,
+        This should be at least 5, preferably more. When less than 5,
         the time series should be made at least 2**(5-quality) times longer.
 
     """
@@ -73,7 +74,7 @@ def num_independent(values, fignum=None):
     while bs >= 1:
         nb = len(values) // bs
         blocks = values[: nb * bs].reshape(nb, bs)
-        avvar = blocks.mean(axis=1).var(ddof=1) / (nb - 1)
+        avvar = blocks.mean(axis=1).var(ddof=1) / nb
         bss.insert(0, bs)
         ineffs.insert(0, avvar)
         bs //= 2
@@ -119,8 +120,8 @@ def num_independent(values, fignum=None):
         plt.close(fignum)
         _fig, ax = plt.subplots(num=fignum)
         ax.set_title(
-            f"Statistical inefficiency: {ineff_limit:.1f} ||"
-            f"Independent samples: {num_indep:.1f} ||"
+            f"Statistical inefficiency: {ineff_limit:.1f} || "
+            f"Independent samples: {num_indep:.1f} || "
             f"Quality: {quality:d}"
         )
         ax.plot(bss, ineffs, "o", color="#aaaaaa")
