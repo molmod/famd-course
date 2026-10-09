@@ -33,6 +33,37 @@ in the same fashion as the commands used to initialize the PhyStack environment.
     v
     ```
 
+- Test the OpenMM installation with the following terminal command:
+
+    ```bash
+    python -m openmm.testInstallation
+    ```
+
+    You should see the following output (or something similar):
+
+    ```
+    OpenMM Version: 8.5.2
+    Git Revision: Unknown
+
+    There are 4 Platforms available:
+
+    1 Reference - Successfully computed forces
+    2 CPU - Successfully computed forces
+    3 CUDA - Successfully computed forces
+    4 OpenCL - Successfully computed forces
+
+    Median difference in forces between platforms:
+
+    Reference vs. CPU: 6.28176e-06
+    Reference vs. CUDA: 6.74703e-06
+    CPU vs. CUDA: 7.3422e-07
+    Reference vs. OpenCL: 6.74321e-06
+    CPU vs. OpenCL: 7.56469e-07
+    CUDA vs. OpenCL: 1.81922e-07
+
+    All differences are within tolerance.
+    ```
+
 - Make a new directory for the course and enter it:
 
     ```bash

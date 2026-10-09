@@ -10,4 +10,5 @@
 source ${VSC_SCRATCH}/phystack/venvs/3.14.2-GCCcore-15.2.0/activate.sh
 export OPENMM_CPU_THREADS=${SLURM_CPUS_PER_TASK}
 export OPENMM_DEFAULT_PLATFORM=CUDA
+python -m openmm.testInstallation
 ./runall.sh
