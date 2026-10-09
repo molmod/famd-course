@@ -81,7 +81,7 @@ Take the following steps:
     # The mamba create command is a single long line,
     # too long to fit on screen, so it is usually wrapped.
     # Make sure you copy it completely as a single line.
-    mamba create -n famd python git numpy pandas scipy matplotlib ipympl jupyterlab rdkit openbabel openmm mdtraj nglview pymbar pdbfixer parmed stacie openff-toolkit
+    mamba create -n famd python git numpy pandas scipy matplotlib ipympl jupyterlab rdkit openbabel openmm mdtraj nglview pdbfixer parmed stacie openff-toolkit
     # Activate the OpenMM environment
     mamba activate famd
     ```
