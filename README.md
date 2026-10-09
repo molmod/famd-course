@@ -1,8 +1,8 @@
-All files in this repository are licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
+[![License: CC BY-NC 4.0](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![Status of the pre-commit hooks](https://results.pre-commit.ci/badge/github/molmod/famd-course/main.svg)](https://results.pre-commit.ci/latest/github/molmod/famd-course/main)
 
 
-# Course Materials for "Foundations and Applications of Molecular Dynamics"
+# Tutorials for "Foundations and Applications of Molecular Dynamics"
 
 ## Scope
 
@@ -53,6 +53,6 @@ and includes contributions from Jelle Vekeman.
 
 ## License
 
-[![License: CC BY-NC 4.0](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
+All files in this repository are licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
 
 The software installed by following the setup instructions (OpenMM and other packages) is distributed under its own licenses.
