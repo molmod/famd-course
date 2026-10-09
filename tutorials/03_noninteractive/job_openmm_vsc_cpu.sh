@@ -12,6 +12,10 @@ ml load OpenMM/8.5.2-foss-2026.1
 # Jupyter (nbconvert, ipykernel) to run the notebook
 ml load jupyter-server/2.19.0-GCCcore-15.2.0
 
+# Ignore personal Jupyter kernels (e.g. in ~/.local/share/jupyter/kernels),
+# which may point to a different Python environment.
+# Use the ipykernel from the modules loaded above instead.
+export JUPYTER_DATA_DIR=$(mktemp -d)
 # Suppress irrelevant warnings
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 # Set the number of threads.
