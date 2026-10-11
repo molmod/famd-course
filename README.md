@@ -30,6 +30,9 @@ The tutorials assume you have a basic knowledge of [Python](https://www.python.o
 
    See [tutorials/README.md](tutorials/README.md) for links to the individual notebooks.
 
+3. The [qm/](qm/) folder documents how the MBIS charges used in the ligand tutorials were computed.
+   This is optional background material: you do not need to run it to follow the tutorials.
+
 A GPU is recommended but not required.
 OpenMM is highly optimized for GPUs, which typically run simulations about 100 times faster than a regular CPU.
 All tutorials can also be completed on a CPU.
