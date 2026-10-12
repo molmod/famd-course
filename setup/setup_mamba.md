@@ -143,9 +143,6 @@ Take the following steps:
     In VSCode, you will have to select the `famd` environment as the Python 3 kernel for the notebook.
     This should show the same output as in the previous step.
 
-1. Install VMD, which will be used for showing some good visualization practices.
-   Go to [the VMD download page](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD) and follow the instructions.
-
 ## Workaround for NGLview 4.0.1 bug
 
 The latest version of NGLview, 4.0.1, which is also the one on conda-forge, installed with the instructions above,

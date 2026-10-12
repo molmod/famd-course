@@ -29,9 +29,9 @@ The tutorials consist of the following sections, to be followed more or less in 
 - [05_analysis/02_physicochemical_properties.ipynb](05_analysis/02_physicochemical_properties.ipynb)
 - [05_analysis/03_alignment_principal_component_analysis.ipynb](05_analysis/03_alignment_principal_component_analysis.ipynb)
 
-**6. Visualization:**
+**6. Restart a simulation from a saved state:**
 
-- [06_visualization/visualization.md](06_visualization/visualization.md)
+- [06_restart/01_restart_from_saved_state.ipynb](06_restart/01_restart_from_saved_state.ipynb)
 
 **7. Ligands:**
 

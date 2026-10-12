@@ -25,7 +25,7 @@ The tutorials assume you have a basic knowledge of [Python](https://www.python.o
    3. Running demanding notebooks as non-interactive jobs on an HPC cluster
    4. A short protein simulation (villin headpiece)
    5. Analysis of MD trajectories
-   6. Visualization
+   6. Restarting a simulation from a saved state
    7. Ligands, using ibuprofen as an example
 
    See [tutorials/README.md](tutorials/README.md) for links to the individual notebooks.

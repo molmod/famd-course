@@ -3,6 +3,8 @@
 scalar*.csv
 traj*.*
 init*.*
+final.*
+*.chk
 tmp
 __pycache__
 hints.txt
