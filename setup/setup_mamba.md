@@ -77,12 +77,10 @@ Take the following steps:
     ```bash
     # Make sure your base environment is up-to-date.
     mamba update --all
-    # Make a new environment for OpenMM, installing all the software, which takes some minutes.
-    # The mamba create command is a single long line,
-    # too long to fit on screen, so it is usually wrapped.
+    # Make a new environment for the tutorials, which takes some minutes.
+    # The mamba create command is a single long line, too long to fit on screen.
     # Make sure you copy it completely as a single line.
-    mamba create -n famd python git numpy pandas scipy matplotlib ipympl jupyterlab rdkit openbabel openmm mdtraj nglview pdbfixer parmed stacie openff-toolkit ambertools
-    # Activate the OpenMM environment
+    mamba create -f https://raw.githubusercontent.com/molmod/famd-course/refs/heads/main/setup/environment.yaml
     mamba activate famd
     ```
 
