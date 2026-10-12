@@ -1,0 +1,30 @@
+name: famd
+channels:
+  - conda-forge
+dependencies:
+  # For the tutorials
+  - python
+  - git
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - ipympl
+  - jupyterlab
+  - rdkit
+  - openbabel
+  - openmm
+  - mdtraj
+  - nglview
+  - pdbfixer
+  - parmed
+  - stacie
+  - openff-toolkit
+  - ambertools
+  # For the MBIS calculations
+  - psi4
+  - geometric
+  - stepup
+  # For later (building the lecture slides from source)
+  - stepup-reprep
+  - typst
