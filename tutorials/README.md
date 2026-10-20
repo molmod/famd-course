@@ -38,6 +38,12 @@ The tutorials consist of the following sections, to be followed more or less in 
 - [07_ligands/01_ibuprofen_gas_phase.ipynb](07_ligands/01_ibuprofen_gas_phase.ipynb)
 - [07_ligands/02_ibuprofen_solvent.ipynb](07_ligands/02_ibuprofen_solvent.ipynb)
 
+**8. Transport properties: ionic conductivity of aqueous sodium acetate:**
+
+- [08_transport/01_npt_equilibration.ipynb](08_transport/01_npt_equilibration.ipynb)
+- [08_transport/02_nvt_production.ipynb](08_transport/02_nvt_production.ipynb)
+- [08_transport/03_conductivity_analysis.ipynb](08_transport/03_conductivity_analysis.ipynb)
+
 ## Online resources
 
 The tutorials are strongly inspired by several online resources (tutorials, documentation and examples) from the OpenMM, Python, NumPy, Matplotlib and other projects.

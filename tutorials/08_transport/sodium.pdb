@@ -1,0 +1,4 @@
+REMARK   1 CREATED WITH OPENMM 8.6.1, 2026-10-20
+HETATM    1 NA    NA A   1       0.000   0.000   0.000  1.00  0.00          Na  
+TER       2       NA A   1
+END

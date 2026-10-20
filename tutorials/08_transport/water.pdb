@@ -1,0 +1,6 @@
+REMARK   1 CREATED WITH OPENMM 8.6.1, 2026-10-20
+HETATM    1  O   HOH A   1       0.000  -0.391   0.000  1.00  0.00           O  
+HETATM    2  H1  HOH A   1       0.757   0.195   0.000  1.00  0.00           H  
+HETATM    3  H2  HOH A   1      -0.757   0.195   0.000  1.00  0.00           H  
+TER       4      HOH A   1
+END

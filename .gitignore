@@ -5,6 +5,8 @@ traj*.*
 init*.*
 final.*
 *.chk
+*.dcd
+*.html
 tmp
 __pycache__
 hints.txt
