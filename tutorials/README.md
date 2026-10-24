@@ -25,6 +25,8 @@ The tutorials consist of the following sections, to be followed more or less in 
 
 **5. Analysis of MD trajectories:**
 
+These tutorials use the outputs from the previous tutorial and assume that it has been run successfully.
+
 - [05_analysis/01_internal_coordinates_averages.ipynb](05_analysis/01_internal_coordinates_averages.ipynb)
 - [05_analysis/02_physicochemical_properties.ipynb](05_analysis/02_physicochemical_properties.ipynb)
 - [05_analysis/03_alignment_principal_component_analysis.ipynb](05_analysis/03_alignment_principal_component_analysis.ipynb)
