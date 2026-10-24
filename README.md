@@ -27,6 +27,7 @@ The tutorials assume you have a basic knowledge of [Python](https://www.python.o
    5. Analysis of MD trajectories
    6. Restarting a simulation from a saved state
    7. Ligands, using ibuprofen as an example
+   8. Transport properties, using the conductivity of aqueous sodium acetate as an example
 
    See [tutorials/README.md](tutorials/README.md) for links to the individual notebooks.
 
